@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt – LUNARA</title>
+  <meta name="description" content="Kontaktiere das LUNARA Team. Wir helfen dir gerne bei Fragen zu Bestellungen, Produkten oder deinem Konto.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <meta name="theme-color" content="#050508">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav id="navbar" class="scrolled">
+    <div class="logo"><a href="/">LUNARA</a></div>
+    <div class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></div>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop.html">Shop</a></li>
+      <li><a href="/account.html">Konto</a></li>
+      <li><button class="btn-ghost" id="cart-button">🛒 <span class="cart-count" id="cart-count">0</span></button></li>
+    </ul>
+  </nav>
+
+  <main class="legal-page">
+    <div class="container">
+      <h1 class="reveal">Kontakt</h1>
+      
+      <p class="text-muted reveal" style="font-size: var(--text-lg); margin-bottom: var(--space-8);">
+        Wir sind für dich da. Egal ob Fragen zu Bestellungen, Produkten oder deinem Konto – schreib uns!
+      </p>
+
+      <div class="grid grid-2" style="gap: var(--space-8);">
+        <!-- Contact Form -->
+        <div class="card reveal">
+          <h2>Schreib uns</h2>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" name="name" placeholder="Dein Name" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-email">E-Mail</label>
+              <input type="email" id="contact-email" name="email" placeholder="deine@email.de" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-subject">Betreff</label>
+              <select id="contact-subject" name="subject" required>
+                <option value="">Bitte wählen...</option>
+                <option value="order">Frage zu meiner Bestellung</option>
+                <option value="product">Produktfrage</option>
+                <option value="return">Rückgabe / Widerruf</option>
+                <option value="account">Mein Konto / Points</option>
+                <option value="other">Sonstiges</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contact-order">Bestellnummer (optional)</label>
+              <input type="text" id="contact-order" name="order" placeholder="z.B. abc12345">
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Nachricht</label>
+              <textarea id="contact-message" name="message" rows="5" placeholder="Wie können wir dir helfen?" required></textarea>
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Nachricht senden</button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="reveal">
+          <div class="card" style="margin-bottom: var(--space-4);">
+            <h3>📧 E-Mail</h3>
+            <p>
+              <a href="mailto:kontakt@lunara.de">kontakt@lunara.de</a>
+            </p>
+            <p class="text-muted" style="font-size: var(--text-sm);">
+              Wir antworten in der Regel innerhalb von 24 Stunden.
+            </p>
+          </div>
+          
+          <div class="card" style="margin-bottom: var(--space-4);">
+            <h3>📞 Telefon</h3>
+            <p>
+              +49 (0) 123 456789
+            </p>
+            <p class="text-muted" style="font-size: var(--text-sm);">
+              Mo-Fr, 9:00 - 17:00 Uhr
+            </p>
+          </div>
+          
+          <div class="card" style="margin-bottom: var(--space-4);">
+            <h3>📍 Adresse</h3>
+            <p>
+              LUNARA GmbH<br>
+              Musterstraße 123<br>
+              12345 Musterstadt<br>
+              Deutschland
+            </p>
+          </div>
+          
+          <div class="card">
+            <h3>⏰ Antwortzeiten</h3>
+            <p class="text-muted">
+              Wir bemühen uns, alle Anfragen innerhalb von 24 Stunden zu beantworten. An Wochenenden und Feiertagen kann es etwas länger dauern.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <section class="legal-section reveal" style="margin-top: var(--space-12);">
+        <h2>Häufige Fragen</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Wo ist meine Bestellung?</summary>
+            <p>
+              Du findest alle Informationen zu deiner Bestellung in deinem <a href="/account.html#orders">Kundenkonto</a>. 
+              Nach dem Versand erhältst du eine E-Mail mit Sendungsverfolgung.
+            </p>
+          </details>
+          
+          <details class="faq-item">
+            <summary>Wie kann ich meine Bestellung stornieren?</summary>
+            <p>
+              Solange deine Bestellung noch nicht versendet wurde, können wir sie stornieren. 
+              Kontaktiere uns so schnell wie möglich per E-Mail oder Telefon.
+            </p>
+          </details>
+          
+          <details class="faq-item">
+            <summary>Wie funktioniert die Rückgabe?</summary>
+            <p>
+              Du hast 14 Tage Zeit, deine Bestellung zu widerrufen. Alle Details findest du in unserer 
+              <a href="/widerruf.html">Widerrufsbelehrung</a>. Die Rücksendung ist für dich kostenlos.
+            </p>
+          </details>
+          
+          <details class="faq-item">
+            <summary>Was sind LUNARA Points?</summary>
+            <p>
+              Mit jedem Einkauf sammelst du Punkte, die du bei zukünftigen Bestellungen einlösen kannst. 
+              20 Punkte = 1€ Rabatt. Mehr Infos findest du in deinem <a href="/account.html#points">Konto</a>.
+            </p>
+          </details>
+          
+          <details class="faq-item">
+            <summary>Ist die Verpackung diskret?</summary>
+            <p>
+              Ja! Alle Bestellungen werden in neutraler Verpackung ohne Hinweis auf LUNARA oder den Inhalt versendet. 
+              Mehr dazu auf unserer <a href="/delivery.html">Versandseite</a>.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 LUNARA. Alle Rechte vorbehalten.</p>
+        <div class="footer-legal">
+          <a href="/impressum.html">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+          <a href="/agb.html">AGB</a>
+          <a href="/widerruf.html">Widerruf</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toast-container"></div>
+  <button class="safe-exit-btn" id="safe-exit-btn" title="Safe Exit">🔒</button>
+
+  <script>
+    const API = '/api';
+    
+    // Navigation
+    const nav = document.getElementById('navbar'), toggle = document.getElementById('nav-toggle'), menu = document.getElementById('nav-menu');
+    toggle?.addEventListener('click', () => { menu?.classList.toggle('active'); toggle.classList.toggle('active'); });
+    
+    // Cart count
+    const cart = JSON.parse(localStorage.getItem('lunara_cart')||'[]');
+    document.getElementById('cart-count').textContent = cart.reduce((s,i)=>s+i.quantity,0);
+    
+    // Safe exit
+    document.getElementById('safe-exit-btn')?.addEventListener('click', () => document.body.classList.toggle('safe-mode'));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') document.body.classList.toggle('safe-mode'); });
+    
+    // Contact form
+    document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        subject: form.subject.value,
+        order: form.order.value,
+        message: form.message.value,
+      };
+      
+      try {
+        const res = await fetch(`${API}/contact`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        if (res.ok) {
+          toast('Nachricht gesendet! Wir melden uns bald.', 'success');
+          form.reset();
+        } else {
+          throw new Error('Senden fehlgeschlagen');
+        }
+      } catch (err) {
+        // Fallback: mailto
+        const mailtoLink = `mailto:kontakt@lunara.de?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`Name: ${data.name}\nE-Mail: ${data.email}\nBestellnummer: ${data.order || '-'}\n\n${data.message}`)}`;
+        window.location.href = mailtoLink;
+        toast('Formular wird per E-Mail geöffnet...', 'success');
+      }
+    });
+    
+    function toast(msg, type = 'success') {
+      const c = document.getElementById('toast-container'), t = document.createElement('div');
+      t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 4000);
+    }
+    
+    // Reveal
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 – Seite nicht gefunden | LUNARA</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <meta name="theme-color" content="#050508">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-8);
+    }
+    .error-content {
+      max-width: 500px;
+    }
+    .error-code {
+      font-family: var(--font-heading);
+      font-size: clamp(6rem, 20vw, 12rem);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-4);
+    }
+    .error-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-4);
+    }
+    .error-text {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-8);
+    }
+    .error-actions {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .moon-decoration {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--color-accent) 0%, transparent 70%);
+      opacity: 0.05;
+      pointer-events: none;
+    }
+    .moon-1 { top: 10%; left: -100px; }
+    .moon-2 { bottom: 10%; right: -100px; }
+  </style>
+</head>
+<body>
+  <div class="moon-decoration moon-1"></div>
+  <div class="moon-decoration moon-2"></div>
+  
+  <nav id="navbar" class="scrolled">
+    <div class="logo"><a href="/">LUNARA</a></div>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop.html">Shop</a></li>
+      <li><a href="/account.html">Konto</a></li>
+    </ul>
+  </nav>
+
+  <main class="error-page">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Seite nicht gefunden</h1>
+      <p class="error-text">
+        Die von dir gesuchte Seite existiert nicht oder wurde verschoben. 
+        Vielleicht findest du was du suchst in unserem Shop?
+      </p>
+      <div class="error-actions">
+        <a href="/" class="btn-secondary">Zur Startseite</a>
+        <a href="/shop.html" class="btn">Zum Shop</a>
+      </div>
+    </div>
+  </main>
+
+  <button class="safe-exit-btn" id="safe-exit-btn" title="Safe Exit">🔒</button>
+
+  <script>
+    document.getElementById('safe-exit-btn')?.addEventListener('click', () => {
+      document.body.classList.toggle('safe-mode');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') document.body.classList.add('safe-mode');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LUNARA Shop – Exklusive Dessous & Lingerie</title>
+  <meta name="description" content="Entdecke die LUNARA Kollektion. Exklusive Dessous, BHs, Panties, Sets und Accessoires – sorgfältig kuratiert für deine sinnlichsten Momente.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#050508">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- Page Transition -->
+  <div class="page-transition" id="page-transition"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="logo"><a href="/">LUNARA</a></div>
+    
+    <div class="nav-toggle" id="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop.html" class="active">Shop</a></li>
+      <li><a href="/#qualitaet">Qualität</a></li>
+      <li><a href="/#rewards">Rewards</a></li>
+      <li><a href="/account.html" class="account-link hidden" id="account-link">Konto</a></li>
+      <li><button class="btn-secondary login-btn" id="login-btn">Login</button></li>
+      <li>
+        <button class="btn-ghost" id="cart-button">
+          🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Shop Header -->
+  <section class="section" style="padding-top: calc(var(--nav-height) + var(--space-8));">
+    <div class="container">
+      <h1 class="text-center reveal">Shop</h1>
+      <p class="text-center text-muted reveal">Entdecke unsere exklusive Kollektion – sorgfältig kuratiert für dich.</p>
+      
+      <!-- Filters -->
+      <div class="filters reveal" style="justify-content: center; margin-top: var(--space-8);">
+        <button class="btn-secondary active" data-filter="All">Alle</button>
+        <button class="btn-secondary" data-filter="Bras">BHs</button>
+        <button class="btn-secondary" data-filter="Panties">Panties</button>
+        <button class="btn-secondary" data-filter="Sets">Sets</button>
+        <button class="btn-secondary" data-filter="Accessories">Accessoires</button>
+      </div>
+      
+      <!-- Search & Sort -->
+      <div class="search-sort reveal" style="margin-top: var(--space-6);">
+        <input 
+          type="text" 
+          id="product-search" 
+          placeholder="Produkte suchen..." 
+          aria-label="Produkte durchsuchen"
+        >
+        <select id="product-sort" aria-label="Sortieren nach">
+          <option value="name">Nach Name</option>
+          <option value="price-asc">Preis aufsteigend</option>
+          <option value="price-desc">Preis absteigend</option>
+          <option value="newest">Neueste zuerst</option>
+        </select>
+      </div>
+      
+      <!-- Products Grid -->
+      <div id="products-container" class="grid grid-3" style="margin-top: var(--space-8);"></div>
+      
+      <!-- Loading State -->
+      <div id="products-loading" class="text-center" style="padding: var(--space-12);">
+        <div class="spinner"></div>
+        <p class="text-muted" style="margin-top: var(--space-4);">Produkte werden geladen...</p>
+      </div>
+      
+      <!-- Empty State -->
+      <div id="products-empty" class="text-center hidden" style="padding: var(--space-12);">
+        <p class="text-muted">Keine Produkte gefunden.</p>
+        <button class="btn-secondary" onclick="resetFilters()" style="margin-top: var(--space-4);">Filter zurücksetzen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">LUNARA</div>
+          <p>Curated Intimacy – Exklusive Dessous, sorgfältig kuratiert für deine sinnlichsten Momente.</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="/shop.html">Alle Produkte</a></li>
+            <li><a href="/shop.html?category=Bras">BHs</a></li>
+            <li><a href="/shop.html?category=Panties">Panties</a></li>
+            <li><a href="/shop.html?category=Sets">Sets</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Konto</h4>
+          <ul>
+            <li><a href="/account.html">Mein Konto</a></li>
+            <li><a href="/account.html#orders">Bestellungen</a></li>
+            <li><a href="/account.html#points">LUNARA Points</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Hilfe</h4>
+          <ul>
+            <li><a href="/delivery.html">Versand</a></li>
+            <li><a href="/widerruf.html">Widerruf</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 LUNARA. Alle Rechte vorbehalten.</p>
+        <div class="footer-legal">
+          <a href="/impressum.html">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+          <a href="/agb.html">AGB</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Dein Warenkorb</h3>
+      <button class="close-cart" id="close-cart">×</button>
+    </div>
+    <div class="cart-content" id="cart-content"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Gesamt</span>
+        <span class="cart-total-amount" id="cart-total">€0,00</span>
+      </div>
+      <button class="btn" id="checkout-btn" onclick="window.location.href='/checkout.html'">Zur Kasse</button>
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="product-modal" class="modal-overlay">
+    <div class="modal" id="product-modal-content"></div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="auth-modal-title">Login</h2>
+        <button class="modal-close" id="auth-modal-close">×</button>
+      </div>
+      
+      <form id="login-form" class="auth-form">
+        <div class="form-group">
+          <label for="login-email">E-Mail</label>
+          <input type="email" id="login-email" name="email" placeholder="deine@email.de" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Passwort</label>
+          <input type="password" id="login-password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">Anmelden</button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">
+          Noch kein Konto? <a href="#" id="show-register">Jetzt registrieren</a>
+        </p>
+      </form>
+      
+      <form id="register-form" class="auth-form hidden">
+        <div class="form-group">
+          <label for="register-name">Name (optional)</label>
+          <input type="text" id="register-name" name="name" placeholder="Dein Name">
+        </div>
+        <div class="form-group">
+          <label for="register-email">E-Mail</label>
+          <input type="email" id="register-email" name="email" placeholder="deine@email.de" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Passwort</label>
+          <input type="password" id="register-password" name="password" placeholder="Mind. 8 Zeichen" required minlength="8">
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">
+          Registrieren & 50 Punkte sichern
+        </button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">
+          Bereits ein Konto? <a href="#" id="show-login">Zum Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Safe Exit -->
+  <button class="safe-exit-btn" id="safe-exit-btn" title="Safe Exit">🔒</button>
+
+  <script type="module" src="/js/app.js"></script>
+  <script type="module">
+    // Shop-specific: render all products and handle URL params
+    import { loadProducts, renderProducts, state } from '/js/app.js';
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Check URL params for category filter
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get('category');
+      
+      await loadProducts();
+      
+      // Hide loading, show products
+      document.getElementById('products-loading').classList.add('hidden');
+      
+      const container = document.getElementById('products-container');
+      renderProducts(container, category || 'All'); // No limit on shop page
+      
+      // Update active filter button
+      if (category) {
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.filter === category);
+        });
+      }
+    });
+    
+    // Reset filters function
+    window.resetFilters = function() {
+      document.querySelectorAll('[data-filter]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === 'All');
+      });
+      document.getElementById('product-search').value = '';
+      document.getElementById('product-sort').value = 'name';
+      renderProducts(document.getElementById('products-container'), 'All');
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>LUNARA – Curated Intimacy | Exklusive Dessous & Lingerie</title>
+  <meta name="description" content="LUNARA – Curated Intimacy. Entdecke exklusive Dessous und luxuriöse Lingerie, sorgfältig kuratiert für deine sinnlichsten Momente.">
+  <meta name="keywords" content="LUNARA, Dessous, Lingerie, Luxus, Premium, Intimwäsche, BHs, Panties, Sets">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="LUNARA – Curated Intimacy">
+  <meta property="og:description" content="Exklusive Dessous, sorgfältig kuratiert für deine sinnlichsten Momente.">
+  <meta property="og:image" content="/assets/img/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lunara.de">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#050508">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       INTRO ANIMATION
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="intro-overlay" id="intro-overlay">
+    <div class="intro-particles" id="intro-particles"></div>
+    <div class="intro-logo">LUNARA</div>
+    <div class="intro-tagline">Curated Intimacy</div>
+    <span class="intro-skip" id="intro-skip">Überspringen ↓</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PAGE TRANSITION OVERLAY
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="page-transition" id="page-transition"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="logo"><a href="/">LUNARA</a></div>
+    
+    <div class="nav-toggle" id="nav-toggle" role="button" aria-label="Navigation umschalten" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <ul id="nav-menu">
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="/shop.html">Shop</a></li>
+      <li><a href="#qualitaet">Qualität</a></li>
+      <li><a href="#rewards">Rewards</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="/account.html" class="account-link hidden" id="account-link">Konto</a></li>
+      <li><button class="btn-secondary login-btn" id="login-btn">Login</button></li>
+      <li>
+        <button class="btn-ghost" id="cart-button" aria-label="Warenkorb öffnen">
+          🛒 <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-particles" id="hero-particles"></div>
+    <div class="hero-content">
+      <h1>Curated Intimacy</h1>
+      <p>Exklusive Dessous, sorgfältig kuratiert für deine sinnlichsten Momente. Entdecke unseren Kosmos aus Luxus und Leidenschaft.</p>
+      <div class="cta">
+        <a href="/shop.html" class="btn btn-lg">Jetzt entdecken</a>
+        <a href="#newsletter" class="btn-secondary btn-lg">Newsletter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       KOLLEKTION PREVIEW
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="kollektion" class="section">
+    <div class="container">
+      <h2 class="text-center reveal">Unsere Kollektion</h2>
+      <p class="text-center text-muted reveal">Wähle deine Kategorie und lass dich verzaubern.</p>
+      
+      <div class="filters reveal" style="justify-content: center; margin-top: var(--space-8);">
+        <button class="btn-secondary active" data-filter="All">Alle</button>
+        <button class="btn-secondary" data-filter="Bras">BHs</button>
+        <button class="btn-secondary" data-filter="Panties">Panties</button>
+        <button class="btn-secondary" data-filter="Sets">Sets</button>
+        <button class="btn-secondary" data-filter="Accessories">Accessoires</button>
+      </div>
+      
+      <div id="products-container" class="grid grid-3" style="margin-top: var(--space-8);"></div>
+      
+      <div class="text-center reveal" style="margin-top: var(--space-10);">
+        <a href="/shop.html" class="btn">Alle Produkte ansehen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       QUALITÄTSSYSTEM
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="qualitaet" class="section section-alt">
+    <div class="container">
+      <h2 class="text-center reveal">Unser 6-Punkte-Qualitätssystem</h2>
+      <p class="text-center text-muted reveal">Wir bewerten jedes Produkt anhand von sechs Kriterien, damit du genau weißt, was dich erwartet.</p>
+      
+      <div class="grid grid-3 reveal-stagger" style="margin-top: var(--space-10);">
+        <div class="tier-card">
+          <div class="tier-icon">✨</div>
+          <h3 class="tier-name">Zustand</h3>
+          <p class="text-muted">Neuwertig oder getragen – wir kennzeichnen jeden Zustand transparent und ehrlich.</p>
+        </div>
+        
+        <div class="tier-card">
+          <div class="tier-icon">🌸</div>
+          <h3 class="tier-name">Duft</h3>
+          <p class="text-muted">Von neutral bis intensiv – du wählst dein olfaktorisches Erlebnis.</p>
+        </div>
+        
+        <div class="tier-card">
+          <div class="tier-icon">💧</div>
+          <h3 class="tier-name">Waschzustand</h3>
+          <p class="text-muted">Frisch gereinigt oder mit authentischem Tragegefühl – wir listen den Waschstatus.</p>
+        </div>
+        
+        <div class="tier-card">
+          <div class="tier-icon">🎀</div>
+          <h3 class="tier-name">Materialqualität</h3>
+          <p class="text-muted">Nur hochwertigste Stoffe – vom zarten Tüll bis zur edlen Spitze.</p>
+        </div>
+        
+        <div class="tier-card">
+          <div class="tier-icon">⏱️</div>
+          <h3 class="tier-name">Tragedauer</h3>
+          <p class="text-muted">Wie lange das Kleidungsstück getragen wurde, erfährst du transparent.</p>
+        </div>
+        
+        <div class="tier-card">
+          <div class="tier-icon">🔮</div>
+          <h3 class="tier-name">Extras</h3>
+          <p class="text-muted">Kleine Geheimnisse, die jedes Teil einzigartig machen – erfahre mehr im Detail.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       LUNARA POINTS / REWARDS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="rewards" class="section">
+    <div class="container">
+      <h2 class="text-center reveal">LUNARA Points</h2>
+      <p class="text-center text-muted reveal">Sammle Punkte bei jedem Einkauf und steige im Status auf – von Moon bis Nova.</p>
+      
+      <div class="grid grid-3 reveal-stagger" style="margin-top: var(--space-10);">
+        <div class="tier-card">
+          <div class="tier-icon">🌙</div>
+          <h3 class="tier-name">Moon</h3>
+          <p class="tier-range">0 – 499 Punkte</p>
+          <p class="text-muted">Beginne deine Reise mit ersten Belohnungen und exklusiven Einblicken.</p>
+        </div>
+        
+        <div class="tier-card">
+          <div class="tier-icon">🌑</div>
+          <h3 class="tier-name">Eclipse</h3>
+          <p class="tier-range">500 – 1.499 Punkte</p>
+          <p class="text-muted">+10% Bonus-Punkte auf alle Einkäufe. Genieße attraktive Vorteile.</p>
+        </div>
+        
+        <div class="tier-card">
+          <div class="tier-icon">✨</div>
+          <h3 class="tier-name">Nova <span class="supernova-badge">VIP</span></h3>
+          <p class="tier-range">1.500+ Punkte</p>
+          <p class="text-muted">+25% Bonus-Punkte, exklusive Produkte und Zugang zum VIP-Cabinet.</p>
+        </div>
+      </div>
+      
+      <div class="reveal" style="max-width: 600px; margin: var(--space-10) auto 0; text-align: center;">
+        <p class="text-muted">
+          <strong class="text-accent">So funktioniert's:</strong> 1 Punkt pro 1€ Einkauf. 
+          20 Punkte = 1€ Rabatt. Einlösbar ab 30€ Bestellwert, max. 20% Rabatt.
+        </p>
+        <p class="text-muted" style="margin-top: var(--space-2);">
+          <strong class="text-accent">Bonus:</strong> 50 Punkte bei Registrierung • 25 Punkte für Newsletter-Anmeldung
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NEWSLETTER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section id="newsletter" class="section section-alt">
+    <div class="container text-center">
+      <h2 class="reveal">Newsletter</h2>
+      <p class="text-muted reveal">Erhalte exklusive Angebote, Neuigkeiten und 25 Bonus-Punkte bei Anmeldung.</p>
+      
+      <form id="newsletter-form" class="reveal" style="max-width: 500px; margin: var(--space-8) auto 0;">
+        <div class="flex gap-4" style="flex-wrap: wrap;">
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Deine E-Mail-Adresse" 
+            required
+            style="flex: 1; min-width: 200px;"
+          >
+          <button type="submit" class="btn">Anmelden</button>
+        </div>
+        <p class="text-muted" style="font-size: var(--text-xs); margin-top: var(--space-3);">
+          Mit der Anmeldung stimmst du unserer <a href="/datenschutz.html">Datenschutzerklärung</a> zu.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">LUNARA</div>
+          <p>Curated Intimacy – Exklusive Dessous, sorgfältig kuratiert für deine sinnlichsten Momente.</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="/shop.html">Alle Produkte</a></li>
+            <li><a href="/shop.html?category=Bras">BHs</a></li>
+            <li><a href="/shop.html?category=Panties">Panties</a></li>
+            <li><a href="/shop.html?category=Sets">Sets</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Konto</h4>
+          <ul>
+            <li><a href="/account.html">Mein Konto</a></li>
+            <li><a href="/account.html#orders">Bestellungen</a></li>
+            <li><a href="/account.html#points">LUNARA Points</a></li>
+            <li><a href="/account.html#wishlist">Wunschliste</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Hilfe</h4>
+          <ul>
+            <li><a href="/delivery.html">Versand</a></li>
+            <li><a href="/widerruf.html">Widerruf</a></li>
+            <li><a href="/kontakt.html">Kontakt</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 LUNARA. Alle Rechte vorbehalten.</p>
+        <div class="footer-legal">
+          <a href="/impressum.html">Impressum</a>
+          <a href="/datenschutz.html">Datenschutz</a>
+          <a href="/agb.html">AGB</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CART DRAWER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Dein Warenkorb</h3>
+      <button class="close-cart" id="close-cart" aria-label="Warenkorb schließen">×</button>
+    </div>
+    <div class="cart-content" id="cart-content">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Dein Warenkorb ist leer</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Gesamt</span>
+        <span class="cart-total-amount" id="cart-total">€0,00</span>
+      </div>
+      <button class="btn" id="checkout-btn" onclick="window.location.href='/checkout.html'">Zur Kasse</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PRODUCT QUICK VIEW MODAL
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div id="product-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal" id="product-modal-content"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       LOGIN/REGISTER MODAL
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div id="auth-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="auth-modal-title">Login</h2>
+        <button class="modal-close" id="auth-modal-close">×</button>
+      </div>
+      
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form">
+        <div class="form-group">
+          <label for="login-email">E-Mail</label>
+          <input type="email" id="login-email" name="email" placeholder="deine@email.de" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Passwort</label>
+          <input type="password" id="login-password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">Anmelden</button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">
+          Noch kein Konto? <a href="#" id="show-register">Jetzt registrieren</a>
+        </p>
+      </form>
+      
+      <!-- Register Form (hidden by default) -->
+      <form id="register-form" class="auth-form hidden">
+        <div class="form-group">
+          <label for="register-name">Name (optional)</label>
+          <input type="text" id="register-name" name="name" placeholder="Dein Name">
+        </div>
+        <div class="form-group">
+          <label for="register-email">E-Mail</label>
+          <input type="email" id="register-email" name="email" placeholder="deine@email.de" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Passwort</label>
+          <input type="password" id="register-password" name="password" placeholder="Mind. 8 Zeichen" required minlength="8">
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">
+          Registrieren & 50 Punkte sichern
+        </button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">
+          Bereits ein Konto? <a href="#" id="show-login">Zum Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOAST CONTAINER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SAFE EXIT BUTTON
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <button class="safe-exit-btn" id="safe-exit-btn" aria-label="Safe Exit" title="Safe Exit">
+    🔒
+  </button>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCRIPTS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

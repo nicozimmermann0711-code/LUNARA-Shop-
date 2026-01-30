@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bestellung erfolgreich – LUNARA</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <meta name="theme-color" content="#050508">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .success-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8);
+      text-align: center;
+    }
+    .success-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-12);
+      max-width: 500px;
+      box-shadow: var(--shadow-xl);
+    }
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-4);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .order-id {
+      font-family: var(--font-heading);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+      margin: var(--space-4) 0;
+    }
+    .points-earned {
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+      color: var(--color-bg);
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin: var(--space-4) 0;
+      font-weight: 600;
+    }
+    .next-steps {
+      margin-top: var(--space-8);
+      text-align: left;
+      background: var(--color-surface-alt);
+      padding: var(--space-6);
+      border-radius: var(--radius-md);
+    }
+    .next-steps h4 {
+      margin-bottom: var(--space-4);
+    }
+    .next-steps ul {
+      list-style: none;
+      padding: 0;
+    }
+    .next-steps li {
+      padding: var(--space-2) 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .next-steps li::before {
+      content: '✓';
+      color: var(--color-success);
+    }
+    .actions {
+      display: flex;
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar" class="scrolled">
+    <div class="logo"><a href="/">LUNARA</a></div>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop.html">Shop</a></li>
+      <li><a href="/account.html">Konto</a></li>
+    </ul>
+  </nav>
+
+  <main class="success-page">
+    <div class="success-card reveal">
+      <div class="success-icon">✨</div>
+      <h1>Vielen Dank für deine Bestellung!</h1>
+      
+      <p class="order-id" id="order-id">Bestellnummer wird geladen...</p>
+      
+      <div id="points-section" class="hidden">
+        <div class="points-earned">
+          +<span id="points-earned">0</span> LUNARA Points verdient!
+        </div>
+      </div>
+      
+      <p class="text-muted">
+        Wir haben dir eine Bestätigung per E-Mail geschickt. Dein Paket wird diskret verpackt und in Kürze versendet.
+      </p>
+      
+      <div class="next-steps">
+        <h4>Was passiert als nächstes?</h4>
+        <ul>
+          <li>Bestätigungs-E-Mail erhalten</li>
+          <li>Versandbenachrichtigung mit Tracking</li>
+          <li>Diskrete Lieferung in 2-4 Werktagen</li>
+        </ul>
+      </div>
+      
+      <div class="actions">
+        <a href="/account.html#orders" class="btn-secondary">Bestellung ansehen</a>
+        <a href="/shop.html" class="btn">Weiter shoppen</a>
+      </div>
+    </div>
+  </main>
+
+  <button class="safe-exit-btn" id="safe-exit-btn" title="Safe Exit">🔒</button>
+
+  <script>
+    // Get order ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order');
+    
+    if (orderId) {
+      document.getElementById('order-id').textContent = `Bestellnummer: #${orderId.slice(0, 8)}`;
+      
+      // Fetch order details to show points earned
+      const token = localStorage.getItem('lunara_token');
+      if (token) {
+        fetch(`/api/orders/${orderId}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.order?.points_earned > 0) {
+            document.getElementById('points-earned').textContent = data.order.points_earned;
+            document.getElementById('points-section').classList.remove('hidden');
+          }
+        })
+        .catch(() => {});
+      }
+    }
+    
+    // Clear cart after successful checkout
+    localStorage.removeItem('lunara_cart');
+    
+    // Safe exit
+    document.getElementById('safe-exit-btn')?.addEventListener('click', () => {
+      document.body.classList.toggle('safe-mode');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') document.body.classList.add('safe-mode');
+    });
+    
+    // Reveal animation
+    setTimeout(() => {
+      document.querySelector('.reveal')?.classList.add('revealed');
+    }, 100);
+  </script>
+</body>
+</html>

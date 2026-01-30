@@ -1,0 +1,297 @@
+[
+  {
+    "id": 1,
+    "name": "Luna Lace Bralette",
+    "category": "Bras",
+    "price": 39.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png", "assets/img/product-placeholder.png"],
+    "shortDesc": "Elegante Bralette aus Spitze mit himmlischem Tragekomfort.",
+    "longDesc": "Die Luna Lace Bralette besticht durch filigrane Spitze und zarte Details. Sie bietet sanften Halt und lässt sich ideal mit unseren Panties kombinieren.",
+    "tags": ["neu", "bestseller"],
+    "variants": [
+      {"size": "S", "color": "schwarz"},
+      {"size": "M", "color": "schwarz"},
+      {"size": "L", "color": "schwarz"}
+    ],
+    "stock": 20,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 4,
+      "waschzustand": 4,
+      "materialqualitaet": 5,
+      "tragedauer": 3,
+      "extras": 2
+    }
+  },
+  {
+    "id": 2,
+    "name": "Starlight Panty",
+    "category": "Panties",
+    "price": 24.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Weiches, himmlisches Höschen mit Sternenprint.",
+    "longDesc": "Das Starlight Panty umhüllt dich mit einem weichen Stoff und einem filigranen Sternenmuster. Perfekt zum Kombinieren mit unseren BHs.",
+    "tags": ["neu"],
+    "variants": [
+      {"size": "S", "color": "rot"},
+      {"size": "M", "color": "rot"},
+      {"size": "L", "color": "rot"}
+    ],
+    "stock": 30,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 5,
+      "waschzustand": 4,
+      "materialqualitaet": 4,
+      "tragedauer": 2,
+      "extras": 1
+    }
+  },
+  {
+    "id": 3,
+    "name": "Nebula Bodysuit",
+    "category": "Sets",
+    "price": 59.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Verführerischer Bodysuit in Galaxie-Optik.",
+    "longDesc": "Der Nebula Bodysuit schmiegt sich wie eine zweite Haut an deinen Körper. Die kosmische Optik und die transparente Spitze machen ihn zum absoluten Hingucker.",
+    "tags": ["bestseller"],
+    "variants": [
+      {"size": "S", "color": "lila"},
+      {"size": "M", "color": "lila"}
+    ],
+    "stock": 15,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 3,
+      "waschzustand": 4,
+      "materialqualitaet": 5,
+      "tragedauer": 4,
+      "extras": 3
+    }
+  },
+  {
+    "id": 4,
+    "name": "Galaxy Set",
+    "category": "Sets",
+    "price": 74.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Zweiteiliges Set mit galaktischem Flair.",
+    "longDesc": "Das Galaxy Set besteht aus BH und Panty, beide mit dezentem Schimmer und zarter Spitze veredelt. Für ein grenzenloses Wohlfühlgefühl.",
+    "tags": ["neu"],
+    "variants": [
+      {"size": "S", "color": "schwarz"},
+      {"size": "M", "color": "schwarz"},
+      {"size": "L", "color": "schwarz"}
+    ],
+    "stock": 18,
+    "qualityScore": {
+      "zustand": 4,
+      "duft": 4,
+      "waschzustand": 4,
+      "materialqualitaet": 5,
+      "tragedauer": 3,
+      "extras": 2
+    }
+  },
+  {
+    "id": 5,
+    "name": "Aurora Robe",
+    "category": "Accessories",
+    "price": 49.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Leichter, fließender Morgenmantel mit schillerndem Glanz.",
+    "longDesc": "Die Aurora Robe hüllt dich in einen Hauch von Luxus. Der fließende Stoff mit subtilen Glanzeffekten macht jede Bewegung zum Erlebnis.",
+    "tags": ["bestseller"],
+    "variants": [
+      {"size": "One Size", "color": "schwarz"}
+    ],
+    "stock": 25,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 4,
+      "waschzustand": 3,
+      "materialqualitaet": 5,
+      "tragedauer": 5,
+      "extras": 4
+    }
+  },
+  {
+    "id": 6,
+    "name": "Nova Push‑Up Bra",
+    "category": "Bras",
+    "price": 44.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Push‑Up BH mit dezentem Glitzereffekt.",
+    "longDesc": "Der Nova Push‑Up Bra verleiht dir ein atemberaubendes Dekolleté. Zarte Glitzerdetails und ein angenehmes Tragegefühl zeichnen dieses Modell aus.",
+    "tags": ["neu"],
+    "variants": [
+      {"size": "75B", "color": "schwarz"},
+      {"size": "80C", "color": "schwarz"},
+      {"size": "85D", "color": "schwarz"}
+    ],
+    "stock": 22,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 4,
+      "waschzustand": 4,
+      "materialqualitaet": 5,
+      "tragedauer": 3,
+      "extras": 2
+    }
+  },
+  {
+    "id": 7,
+    "name": "Celestial Garter Belt",
+    "category": "Accessories",
+    "price": 29.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Eleganter Strapsgürtel mit Sternapplikationen.",
+    "longDesc": "Der Celestial Garter Belt verziert deine Silhouette mit funkelnden Sternchen. Perfekt kombinierbar mit unseren Strümpfen und Dessous.",
+    "tags": ["neu"],
+    "variants": [
+      {"size": "S", "color": "schwarz"},
+      {"size": "M", "color": "schwarz"},
+      {"size": "L", "color": "schwarz"}
+    ],
+    "stock": 28,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 5,
+      "waschzustand": 3,
+      "materialqualitaet": 4,
+      "tragedauer": 4,
+      "extras": 5
+    }
+  },
+  {
+    "id": 8,
+    "name": "Eclipse Mesh Panty",
+    "category": "Panties",
+    "price": 27.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Transparente Panty mit Mondmuster.",
+    "longDesc": "Die Eclipse Mesh Panty spielt mit Transparenz und Mondmotiven. Ein sinnliches und doch komfortables Kleidungsstück für jeden Tag.",
+    "tags": ["bestseller"],
+    "variants": [
+      {"size": "S", "color": "schwarz"},
+      {"size": "M", "color": "schwarz"},
+      {"size": "L", "color": "schwarz"}
+    ],
+    "stock": 20,
+    "qualityScore": {
+      "zustand": 4,
+      "duft": 4,
+      "waschzustand": 4,
+      "materialqualitaet": 4,
+      "tragedauer": 2,
+      "extras": 2
+    }
+  },
+  {
+    "id": 9,
+    "name": "Comet Thong",
+    "category": "Panties",
+    "price": 22.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Tanga mit funkelnder Zierleiste.",
+    "longDesc": "Der Comet Thong bezaubert mit einer funkelnden Zierleiste und einem minimalistischen Schnitt. Kombinierbar mit nahezu jedem BH.",
+    "tags": ["neu"],
+    "variants": [
+      {"size": "S", "color": "schwarz"},
+      {"size": "M", "color": "schwarz"},
+      {"size": "L", "color": "schwarz"}
+    ],
+    "stock": 26,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 3,
+      "waschzustand": 4,
+      "materialqualitaet": 4,
+      "tragedauer": 3,
+      "extras": 1
+    }
+  },
+  {
+    "id": 10,
+    "name": "Starry Night Stockings",
+    "category": "Accessories",
+    "price": 19.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Feinstrümpfe mit dezentem Sternenglanz.",
+    "longDesc": "Unsere Starry Night Stockings sind hauchdünn und überraschen mit einem dezenten Sternenglanz. Perfekt zu unseren Strapsgürteln.",
+    "tags": ["bestseller"],
+    "variants": [
+      {"size": "One Size", "color": "schwarz"}
+    ],
+    "stock": 40,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 5,
+      "waschzustand": 5,
+      "materialqualitaet": 5,
+      "tragedauer": 4,
+      "extras": 2
+    }
+  },
+  {
+    "id": 11,
+    "name": "Supernova Bustier",
+    "category": "Bras",
+    "price": 64.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Stützendes Bustier mit raffiniertem Schnitt und tiefem Rückenausschnitt.",
+    "longDesc": "Das Supernova Bustier bringt deine Kurven zur Geltung und stützt zugleich angenehm. Der tiefe Rückenausschnitt sorgt für das gewisse Etwas.",
+    "tags": ["neu"],
+    "variants": [
+      {"size": "S", "color": "schwarz"},
+      {"size": "M", "color": "schwarz"},
+      {"size": "L", "color": "schwarz"}
+    ],
+    "stock": 12,
+    "qualityScore": {
+      "zustand": 5,
+      "duft": 4,
+      "waschzustand": 4,
+      "materialqualitaet": 5,
+      "tragedauer": 3,
+      "extras": 4
+    }
+  },
+  {
+    "id": 12,
+    "name": "Meteor Shower Set",
+    "category": "Sets",
+    "price": 89.99,
+    "currency": "EUR",
+    "images": ["assets/img/product-placeholder.png"],
+    "shortDesc": "Luxuriöses Set inspiriert von einem Meteorschauer.",
+    "longDesc": "Das Meteor Shower Set verbindet luxuriöse Spitze mit schimmernden Details, inspiriert von einem spektakulären Meteorschauer. BH und Panty sind perfekt aufeinander abgestimmt.",
+    "tags": ["bestseller"],
+    "variants": [
+      {"size": "S", "color": "schwarz"},
+      {"size": "M", "color": "schwarz"},
+      {"size": "L", "color": "schwarz"}
+    ],
+    "stock": 14,
+    "qualityScore": {
+      "zustand": 4,
+      "duft": 4,
+      "waschzustand": 4,
+      "materialqualitaet": 5,
+      "tragedauer": 3,
+      "extras": 5
+    }
+  }
+]

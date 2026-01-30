@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LUNARA – Checkout</title>
+  <meta name="description" content="Sichere Bezahlung bei LUNARA. Schließe deine Bestellung ab.">
+  <meta name="robots" content="noindex">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <meta name="theme-color" content="#050508">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  
+  <!-- Stripe.js -->
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <!-- Navigation (simplified) -->
+  <nav id="navbar" class="scrolled">
+    <div class="logo"><a href="/">LUNARA</a></div>
+    <ul id="nav-menu">
+      <li><a href="/shop.html">← Zurück zum Shop</a></li>
+    </ul>
+  </nav>
+
+  <!-- Checkout Content -->
+  <div class="checkout-page">
+    <h1 class="reveal">Checkout</h1>
+    
+    <!-- Empty Cart Warning -->
+    <div id="checkout-empty" class="text-center hidden" style="padding: var(--space-12);">
+      <p class="text-muted" style="font-size: var(--text-lg);">Dein Warenkorb ist leer.</p>
+      <a href="/shop.html" class="btn" style="margin-top: var(--space-6);">Zum Shop</a>
+    </div>
+    
+    <!-- Checkout Content -->
+    <div id="checkout-content" class="checkout-grid">
+      <!-- Left: Order Summary -->
+      <div class="checkout-form-section reveal">
+        <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-6);">Deine Bestellung</h2>
+        
+        <div id="checkout-items">
+          <!-- Items will be rendered here -->
+        </div>
+        
+        <!-- Points Redemption (only for logged in users) -->
+        <div id="points-section" class="points-redemption hidden">
+          <h4>🌙 LUNARA Points einlösen</h4>
+          <p class="text-muted" style="font-size: var(--text-sm); margin-bottom: var(--space-3);">
+            Du hast <strong id="points-available">0</strong> Punkte verfügbar.
+          </p>
+          <div class="flex items-center gap-4">
+            <input 
+              type="range" 
+              id="points-slider" 
+              class="points-slider" 
+              min="0" 
+              max="0" 
+              value="0"
+              step="20"
+            >
+            <span id="points-to-use">0</span> Punkte
+          </div>
+          <p class="text-accent" style="font-size: var(--text-sm); margin-top: var(--space-2);">
+            = <span id="points-discount">€0,00</span> Rabatt
+          </p>
+          <p class="text-muted" style="font-size: var(--text-xs); margin-top: var(--space-2);">
+            20 Punkte = 1€ • Max. 20% Rabatt • Ab 30€ Bestellwert
+          </p>
+        </div>
+        
+        <!-- Login prompt for guests -->
+        <div id="guest-points-info" class="points-redemption">
+          <h4>🌙 LUNARA Points</h4>
+          <p class="text-muted" style="font-size: var(--text-sm);">
+            <a href="#" id="checkout-login-link">Melde dich an</a> um Punkte zu sammeln und einzulösen!
+          </p>
+          <p class="text-muted" style="font-size: var(--text-xs); margin-top: var(--space-2);">
+            Bei Registrierung erhältst du 50 Willkommenspunkte.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Right: Summary & Payment -->
+      <div class="checkout-summary reveal">
+        <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-6);">Zusammenfassung</h2>
+        
+        <div class="checkout-item">
+          <span>Zwischensumme</span>
+          <span id="checkout-subtotal">€0,00</span>
+        </div>
+        
+        <div class="checkout-item" id="discount-row" style="display: none;">
+          <span class="text-accent">Punkte-Rabatt</span>
+          <span class="text-accent" id="checkout-discount">-€0,00</span>
+        </div>
+        
+        <div class="checkout-item">
+          <span>Versand</span>
+          <span id="checkout-shipping">Kostenlos</span>
+        </div>
+        
+        <div class="checkout-total">
+          <span>Gesamt</span>
+          <span id="checkout-total">€0,00</span>
+        </div>
+        
+        <p class="text-muted" style="font-size: var(--text-xs); margin-bottom: var(--space-4);">
+          inkl. MwSt.
+        </p>
+        
+        <!-- Points to earn info -->
+        <div id="points-earn-info" class="text-center" style="background: var(--color-surface-alt); padding: var(--space-3); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+          <p class="text-muted" style="font-size: var(--text-sm); margin: 0;">
+            Du verdienst <strong class="text-accent" id="points-to-earn">0</strong> Punkte mit dieser Bestellung
+          </p>
+        </div>
+        
+        <!-- Checkout Button -->
+        <button class="btn" id="checkout-btn" style="width: 100%;" onclick="proceedToStripe()">
+          <span id="checkout-btn-text">Jetzt bezahlen</span>
+          <span id="checkout-btn-loading" class="hidden">
+            <span class="spinner" style="width: 16px; height: 16px; border-width: 2px;"></span>
+          </span>
+        </button>
+        
+        <!-- Payment Methods -->
+        <div class="text-center" style="margin-top: var(--space-4);">
+          <p class="text-muted" style="font-size: var(--text-xs); margin-bottom: var(--space-2);">Sichere Zahlung mit</p>
+          <div class="flex justify-center gap-2" style="opacity: 0.7;">
+            <span style="font-size: var(--text-xl);">💳</span>
+            <span style="font-size: var(--text-xl);">🍎</span>
+            <span style="font-size: var(--text-xl);">🔒</span>
+          </div>
+        </div>
+        
+        <!-- Terms -->
+        <p class="text-muted text-center" style="font-size: var(--text-xs); margin-top: var(--space-4);">
+          Mit dem Kauf akzeptierst du unsere <a href="/agb.html">AGB</a> und <a href="/datenschutz.html">Datenschutzerklärung</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="auth-modal-title">Login</h2>
+        <button class="modal-close" id="auth-modal-close">×</button>
+      </div>
+      
+      <form id="login-form" class="auth-form">
+        <div class="form-group">
+          <label for="login-email">E-Mail</label>
+          <input type="email" id="login-email" name="email" placeholder="deine@email.de" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Passwort</label>
+          <input type="password" id="login-password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">Anmelden</button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">
+          Noch kein Konto? <a href="#" id="show-register">Jetzt registrieren</a>
+        </p>
+      </form>
+      
+      <form id="register-form" class="auth-form hidden">
+        <div class="form-group">
+          <label for="register-name">Name (optional)</label>
+          <input type="text" id="register-name" name="name" placeholder="Dein Name">
+        </div>
+        <div class="form-group">
+          <label for="register-email">E-Mail</label>
+          <input type="email" id="register-email" name="email" placeholder="deine@email.de" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Passwort</label>
+          <input type="password" id="register-password" name="password" placeholder="Mind. 8 Zeichen" required minlength="8">
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">
+          Registrieren & 50 Punkte sichern
+        </button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">
+          Bereits ein Konto? <a href="#" id="show-login">Zum Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module">
+    // ============================================================================
+    // CHECKOUT PAGE LOGIC
+    // ============================================================================
+    
+    const CONFIG = {
+      API_URL: '/api',
+      STRIPE_PUBLIC_KEY: 'pk_test_YOUR_STRIPE_KEY', // Replace with your key
+      POINTS_PER_EURO: 20, // 20 points = 1€
+      MAX_DISCOUNT_PERCENT: 20,
+      MIN_ORDER_FOR_POINTS: 30,
+    };
+    
+    // State
+    let cart = [];
+    let products = [];
+    let user = null;
+    let token = null;
+    let pointsToRedeem = 0;
+    
+    // ============================================================================
+    // INITIALIZATION
+    // ============================================================================
+    
+    async function init() {
+      // Load state
+      token = localStorage.getItem('lunara_token');
+      cart = JSON.parse(localStorage.getItem('lunara_cart') || '[]');
+      
+      // Load products
+      try {
+        const res = await fetch('/data/products.json');
+        products = await res.json();
+      } catch (e) {
+        console.error('Error loading products:', e);
+      }
+      
+      // Check if cart is empty
+      if (cart.length === 0) {
+        document.getElementById('checkout-content').classList.add('hidden');
+        document.getElementById('checkout-empty').classList.remove('hidden');
+        return;
+      }
+      
+      // Fetch user if logged in
+      if (token) {
+        try {
+          const res = await fetch(`${CONFIG.API_URL}/auth/me`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            user = data.user;
+            initPointsRedemption();
+          }
+        } catch (e) {
+          console.error('Error fetching user:', e);
+        }
+      }
+      
+      renderCheckout();
+      initEventListeners();
+    }
+    
+    // ============================================================================
+    // RENDER CHECKOUT
+    // ============================================================================
+    
+    function renderCheckout() {
+      const itemsContainer = document.getElementById('checkout-items');
+      let subtotal = 0;
+      
+      itemsContainer.innerHTML = cart.map(item => {
+        const product = products.find(p => p.id === item.productId);
+        if (!product) return '';
+        
+        const itemTotal = product.price * item.quantity;
+        subtotal += itemTotal;
+        
+        return `
+          <div class="checkout-item" style="flex-direction: column; align-items: flex-start; gap: var(--space-2);">
+            <div class="flex justify-between" style="width: 100%;">
+              <span><strong>${product.name}</strong> × ${item.quantity}</span>
+              <span>€${itemTotal.toFixed(2)}</span>
+            </div>
+            <span class="text-muted" style="font-size: var(--text-xs);">
+              ${item.variant.size.toUpperCase()} / ${item.variant.color}
+            </span>
+          </div>
+        `;
+      }).join('');
+      
+      updateTotals(subtotal);
+    }
+    
+    function updateTotals(subtotal = null) {
+      if (subtotal === null) {
+        subtotal = cart.reduce((sum, item) => {
+          const product = products.find(p => p.id === item.productId);
+          return sum + (product ? product.price * item.quantity : 0);
+        }, 0);
+      }
+      
+      const discount = Math.floor(pointsToRedeem / CONFIG.POINTS_PER_EURO);
+      const total = Math.max(0, subtotal - discount);
+      
+      document.getElementById('checkout-subtotal').textContent = `€${subtotal.toFixed(2)}`;
+      document.getElementById('checkout-total').textContent = `€${total.toFixed(2)}`;
+      
+      // Show/hide discount row
+      const discountRow = document.getElementById('discount-row');
+      if (discount > 0) {
+        discountRow.style.display = 'flex';
+        document.getElementById('checkout-discount').textContent = `-€${discount.toFixed(2)}`;
+      } else {
+        discountRow.style.display = 'none';
+      }
+      
+      // Calculate points to earn (based on final total after discount, 1 point per €)
+      const pointsToEarn = Math.floor(total);
+      
+      // Apply tier bonus if user is logged in
+      let tierBonus = 1.0;
+      if (user) {
+        if (user.tier === 'ECLIPSE') tierBonus = 1.1;
+        if (user.tier === 'NOVA') tierBonus = 1.25;
+      }
+      
+      const finalPointsEarned = Math.floor(pointsToEarn * tierBonus);
+      document.getElementById('points-to-earn').textContent = finalPointsEarned;
+    }
+    
+    // ============================================================================
+    // POINTS REDEMPTION
+    // ============================================================================
+    
+    function initPointsRedemption() {
+      if (!user) return;
+      
+      // Hide guest info, show points section
+      document.getElementById('guest-points-info').classList.add('hidden');
+      document.getElementById('points-section').classList.remove('hidden');
+      
+      // Get cart total
+      const subtotal = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.productId);
+        return sum + (product ? product.price * item.quantity : 0);
+      }, 0);
+      
+      // Check minimum order
+      if (subtotal < CONFIG.MIN_ORDER_FOR_POINTS) {
+        document.getElementById('points-section').innerHTML = `
+          <h4>🌙 LUNARA Points einlösen</h4>
+          <p class="text-muted" style="font-size: var(--text-sm);">
+            Mindestbestellwert von €${CONFIG.MIN_ORDER_FOR_POINTS} für Punkteeinlösung erforderlich.
+          </p>
+        `;
+        return;
+      }
+      
+      // Calculate max points usable
+      const maxDiscountByPercent = subtotal * (CONFIG.MAX_DISCOUNT_PERCENT / 100);
+      const maxDiscountByBalance = Math.floor(user.points / CONFIG.POINTS_PER_EURO);
+      const maxDiscount = Math.min(maxDiscountByPercent, maxDiscountByBalance);
+      const maxPoints = Math.floor(maxDiscount * CONFIG.POINTS_PER_EURO);
+      
+      // Update UI
+      document.getElementById('points-available').textContent = user.points;
+      
+      const slider = document.getElementById('points-slider');
+      slider.max = maxPoints;
+      slider.value = 0;
+      
+      // Slider event
+      slider.addEventListener('input', (e) => {
+        pointsToRedeem = parseInt(e.target.value);
+        document.getElementById('points-to-use').textContent = pointsToRedeem;
+        document.getElementById('points-discount').textContent = `€${(pointsToRedeem / CONFIG.POINTS_PER_EURO).toFixed(2)}`;
+        updateTotals();
+      });
+    }
+    
+    // ============================================================================
+    // STRIPE CHECKOUT
+    // ============================================================================
+    
+    async function proceedToStripe() {
+      const btn = document.getElementById('checkout-btn');
+      const btnText = document.getElementById('checkout-btn-text');
+      const btnLoading = document.getElementById('checkout-btn-loading');
+      
+      // Show loading
+      btn.disabled = true;
+      btnText.classList.add('hidden');
+      btnLoading.classList.remove('hidden');
+      
+      try {
+        // Prepare cart items for API
+        const items = cart.map(item => {
+          const product = products.find(p => p.id === item.productId);
+          return {
+            productId: item.productId,
+            variant: item.variant,
+            quantity: item.quantity,
+            price: product?.price || 0,
+            name: product?.name || 'Unbekannt',
+          };
+        });
+        
+        // Call our API to create Stripe session
+        const response = await fetch(`${CONFIG.API_URL}/checkout/create-session`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          },
+          body: JSON.stringify({
+            items,
+            pointsToRedeem: pointsToRedeem || 0
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Checkout fehlgeschlagen');
+        }
+        
+        // Redirect to Stripe
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          // Use Stripe.js redirect
+          const stripe = Stripe(CONFIG.STRIPE_PUBLIC_KEY);
+          const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId });
+          if (error) throw error;
+        }
+        
+      } catch (error) {
+        console.error('Checkout error:', error);
+        showToast(error.message || 'Checkout fehlgeschlagen', 'error');
+        
+        // Reset button
+        btn.disabled = false;
+        btnText.classList.remove('hidden');
+        btnLoading.classList.add('hidden');
+      }
+    }
+    
+    // Make it available globally
+    window.proceedToStripe = proceedToStripe;
+    
+    // ============================================================================
+    // AUTH MODAL
+    // ============================================================================
+    
+    function initEventListeners() {
+      // Login link in checkout
+      document.getElementById('checkout-login-link')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAuthModal('login');
+      });
+      
+      // Auth modal controls
+      document.getElementById('auth-modal-close')?.addEventListener('click', closeAuthModal);
+      document.getElementById('show-register')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAuthModal('register');
+      });
+      document.getElementById('show-login')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAuthModal('login');
+      });
+      
+      // Auth modal backdrop
+      document.getElementById('auth-modal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'auth-modal') closeAuthModal();
+      });
+      
+      // Login form
+      document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        try {
+          const res = await fetch(`${CONFIG.API_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error);
+          
+          token = data.token;
+          user = data.user;
+          localStorage.setItem('lunara_token', token);
+          
+          showToast('Erfolgreich angemeldet!', 'success');
+          closeAuthModal();
+          initPointsRedemption();
+          renderCheckout();
+          
+        } catch (error) {
+          showToast(error.message, 'error');
+        }
+      });
+      
+      // Register form
+      document.getElementById('register-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('register-name').value;
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        
+        try {
+          const res = await fetch(`${CONFIG.API_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, name })
+          });
+          
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error);
+          
+          token = data.token;
+          user = data.user;
+          localStorage.setItem('lunara_token', token);
+          
+          showToast(data.message || 'Willkommen bei LUNARA!', 'success');
+          closeAuthModal();
+          initPointsRedemption();
+          renderCheckout();
+          
+        } catch (error) {
+          showToast(error.message, 'error');
+        }
+      });
+    }
+    
+    function openAuthModal(mode = 'login') {
+      const modal = document.getElementById('auth-modal');
+      const title = document.getElementById('auth-modal-title');
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+      
+      if (mode === 'register') {
+        title.textContent = 'Registrieren';
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+      } else {
+        title.textContent = 'Login';
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+      }
+      
+      modal.classList.add('active');
+    }
+    
+    function closeAuthModal() {
+      document.getElementById('auth-modal')?.classList.remove('active');
+    }
+    
+    // ============================================================================
+    // TOAST
+    // ============================================================================
+    
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+    
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LUNARA – Mein Konto</title>
+  <meta name="description" content="Verwalte dein LUNARA Konto, sammle Punkte und verfolge deine Bestellungen.">
+  <meta name="robots" content="noindex">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+  <meta name="theme-color" content="#050508">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav id="navbar">
+    <div class="logo"><a href="/">LUNARA</a></div>
+    <div class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></div>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop.html">Shop</a></li>
+      <li><a href="/#qualitaet">Qualität</a></li>
+      <li><a href="/#rewards">Rewards</a></li>
+      <li><a href="/account.html" class="active">Konto</a></li>
+      <li><button class="btn-ghost" id="cart-button">🛒 <span class="cart-count" id="cart-count">0</span></button></li>
+    </ul>
+  </nav>
+
+  <div class="account-page">
+    <div id="account-login-prompt" class="text-center" style="padding: var(--space-12);">
+      <h1 class="reveal">Mein Konto</h1>
+      <p class="text-muted reveal" style="margin-bottom: var(--space-8);">Melde dich an, um dein Konto zu verwalten.</p>
+      <button class="btn reveal" onclick="openAuthModal('login')">Anmelden</button>
+      <p class="text-muted reveal" style="margin-top: var(--space-4); font-size: var(--text-sm);">
+        Noch kein Konto? <a href="#" onclick="openAuthModal('register'); return false;">Jetzt registrieren</a>
+      </p>
+    </div>
+
+    <div id="account-content" class="hidden">
+      <h1 class="reveal">Willkommen, <span id="user-name">Mondliebhaber</span></h1>
+      
+      <div class="account-tabs reveal">
+        <button class="account-tab active" data-tab="overview">Übersicht</button>
+        <button class="account-tab" data-tab="points">LUNARA Points</button>
+        <button class="account-tab" data-tab="orders">Bestellungen</button>
+        <button class="account-tab" data-tab="settings">Einstellungen</button>
+      </div>
+
+      <div id="tab-overview" class="account-tab-content active reveal">
+        <div class="grid grid-2" style="gap: var(--space-6);">
+          <div class="card">
+            <h3>🌙 Deine Punkte</h3>
+            <div class="points-display">
+              <span class="points-amount" id="overview-points">0</span>
+              <span class="points-label">LUNARA Points</span>
+            </div>
+            <div class="tier-badge" id="overview-tier">MOON</div>
+            <button class="btn-secondary" onclick="switchTab('points')" style="margin-top: var(--space-4);">Details ansehen</button>
+          </div>
+          
+          <div class="card">
+            <h3>📦 Letzte Bestellungen</h3>
+            <div id="overview-orders"><p class="text-muted">Keine Bestellungen vorhanden.</p></div>
+            <button class="btn-secondary" onclick="switchTab('orders')" style="margin-top: var(--space-4);">Alle Bestellungen</button>
+          </div>
+        </div>
+        
+        <div class="card" style="margin-top: var(--space-6);">
+          <h3>Schnellzugriff</h3>
+          <div class="flex gap-4" style="flex-wrap: wrap;">
+            <a href="/shop.html" class="btn-secondary">🛍️ Weiter shoppen</a>
+            <button class="btn-secondary" onclick="switchTab('settings')">⚙️ Einstellungen</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-points" class="account-tab-content reveal">
+        <div class="card points-hero">
+          <div class="points-display large">
+            <span class="points-amount" id="points-balance">0</span>
+            <span class="points-label">LUNARA Points</span>
+          </div>
+          
+          <div class="tier-progress">
+            <div class="tier-info">
+              <span class="current-tier" id="current-tier-name">MOON</span>
+              <span class="next-tier" id="next-tier-info">500 Punkte bis ECLIPSE</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="tier-progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-3" style="gap: var(--space-4); margin-top: var(--space-6);">
+          <div class="card tier-card" id="tier-moon">
+            <div class="tier-icon">🌙</div>
+            <h4>MOON</h4>
+            <p class="text-muted">0 - 499 Punkte</p>
+            <ul><li>1 Punkt pro 1€</li><li>Standard Vorteile</li></ul>
+          </div>
+          <div class="card tier-card" id="tier-eclipse">
+            <div class="tier-icon">🌑</div>
+            <h4>ECLIPSE</h4>
+            <p class="text-muted">500 - 1.499 Punkte</p>
+            <ul><li>+10% Bonus-Punkte</li><li>Früher Zugang zu Sales</li></ul>
+          </div>
+          <div class="card tier-card" id="tier-nova">
+            <div class="tier-icon">✨</div>
+            <h4>NOVA</h4>
+            <p class="text-muted">Ab 1.500 Punkte</p>
+            <ul><li>+25% Bonus-Punkte</li><li>Exklusive Produkte</li><li>VIP Support</li></ul>
+          </div>
+        </div>
+        
+        <div class="card" style="margin-top: var(--space-6);">
+          <h3>Punkteverlauf</h3>
+          <div id="points-history"><p class="text-muted">Keine Transaktionen vorhanden.</p></div>
+        </div>
+        
+        <div class="card" style="margin-top: var(--space-6);">
+          <h3>So sammelst du Punkte</h3>
+          <div class="grid grid-2" style="gap: var(--space-4);">
+            <div class="earn-method"><span class="earn-icon">🛒</span><div><strong>Einkaufen</strong><p class="text-muted">1 Punkt pro 1€ Einkauf</p></div></div>
+            <div class="earn-method"><span class="earn-icon">📝</span><div><strong>Registrieren</strong><p class="text-muted">50 Willkommenspunkte</p></div></div>
+            <div class="earn-method"><span class="earn-icon">📧</span><div><strong>Newsletter</strong><p class="text-muted">25 Bonus-Punkte</p></div></div>
+            <div class="earn-method"><span class="earn-icon">📸</span><div><strong>Foto-Review</strong><p class="text-muted">100 Bonus-Punkte</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-orders" class="account-tab-content reveal">
+        <div class="card">
+          <h3>Deine Bestellungen</h3>
+          <div id="orders-list">
+            <div class="orders-loading"><div class="spinner"></div><p class="text-muted">Bestellungen werden geladen...</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-settings" class="account-tab-content reveal">
+        <div class="card">
+          <h3>Profil</h3>
+          <form id="profile-form">
+            <div class="form-group">
+              <label for="profile-name">Name</label>
+              <input type="text" id="profile-name" name="name" placeholder="Dein Name">
+            </div>
+            <div class="form-group">
+              <label for="profile-email">E-Mail</label>
+              <input type="email" id="profile-email" name="email" disabled>
+              <p class="text-muted" style="font-size: var(--text-xs); margin-top: var(--space-1);">E-Mail kann nicht geändert werden.</p>
+            </div>
+            <button type="submit" class="btn">Speichern</button>
+          </form>
+        </div>
+        
+        <div class="card" style="margin-top: var(--space-6);">
+          <h3>Passwort ändern</h3>
+          <form id="password-form">
+            <div class="form-group"><label for="current-password">Aktuelles Passwort</label><input type="password" id="current-password" name="currentPassword" required></div>
+            <div class="form-group"><label for="new-password">Neues Passwort</label><input type="password" id="new-password" name="newPassword" required minlength="8"></div>
+            <div class="form-group"><label for="confirm-password">Passwort bestätigen</label><input type="password" id="confirm-password" name="confirmPassword" required minlength="8"></div>
+            <button type="submit" class="btn-secondary">Passwort ändern</button>
+          </form>
+        </div>
+        
+        <div class="card danger" style="margin-top: var(--space-6);">
+          <h3>Abmelden</h3>
+          <p class="text-muted" style="margin-bottom: var(--space-4);">Du wirst von deinem Konto abgemeldet.</p>
+          <button class="btn-danger" id="logout-btn">Abmelden</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="logo">LUNARA</div><p>Curated Intimacy – Exklusive Dessous für deine sinnlichsten Momente.</p></div>
+        <div class="footer-links"><h4>Shop</h4><ul><li><a href="/shop.html">Alle Produkte</a></li><li><a href="/shop.html?category=Sets">Sets</a></li></ul></div>
+        <div class="footer-links"><h4>Konto</h4><ul><li><a href="/account.html">Mein Konto</a></li><li><a href="/account.html#orders">Bestellungen</a></li></ul></div>
+        <div class="footer-links"><h4>Hilfe</h4><ul><li><a href="/delivery.html">Versand</a></li><li><a href="/kontakt.html">Kontakt</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 LUNARA. Alle Rechte vorbehalten.</p>
+        <div class="footer-legal"><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a><a href="/agb.html">AGB</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header"><h3>Dein Warenkorb</h3><button class="close-cart" id="close-cart">×</button></div>
+    <div class="cart-content" id="cart-content"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Gesamt</span><span class="cart-total-amount" id="cart-total">€0,00</span></div>
+      <button class="btn" onclick="window.location.href='/checkout.html'">Zur Kasse</button>
+    </div>
+  </div>
+
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header"><h2 class="modal-title" id="auth-modal-title">Login</h2><button class="modal-close" id="auth-modal-close">×</button></div>
+      <form id="login-form" class="auth-form">
+        <div class="form-group"><label for="login-email">E-Mail</label><input type="email" id="login-email" required></div>
+        <div class="form-group"><label for="login-password">Passwort</label><input type="password" id="login-password" required></div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">Anmelden</button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">Noch kein Konto? <a href="#" id="show-register">Registrieren</a></p>
+      </form>
+      <form id="register-form" class="auth-form hidden">
+        <div class="form-group"><label for="register-name">Name</label><input type="text" id="register-name"></div>
+        <div class="form-group"><label for="register-email">E-Mail</label><input type="email" id="register-email" required></div>
+        <div class="form-group"><label for="register-password">Passwort</label><input type="password" id="register-password" required minlength="8"></div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: var(--space-4);">Registrieren & 50 Punkte sichern</button>
+        <p class="text-center text-muted" style="margin-top: var(--space-4); font-size: var(--text-sm);">Bereits ein Konto? <a href="#" id="show-login">Login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+  <button class="safe-exit-btn" id="safe-exit-btn" title="Safe Exit">🔒</button>
+
+  <script type="module">
+    const API = '/api';
+    let user = null, token = localStorage.getItem('lunara_token');
+
+    async function init() {
+      initUI();
+      if (token) await loadUser();
+      else showLogin();
+      handleHash();
+      window.addEventListener('hashchange', handleHash);
+    }
+
+    async function loadUser() {
+      try {
+        const res = await fetch(`${API}/auth/me`, { headers: { Authorization: `Bearer ${token}` } });
+        if (!res.ok) throw new Error();
+        user = (await res.json()).user;
+        showAccount();
+        updateUI();
+        loadPoints();
+        loadOrders();
+      } catch {
+        localStorage.removeItem('lunara_token');
+        token = null;
+        showLogin();
+      }
+    }
+
+    function showLogin() {
+      document.getElementById('account-login-prompt').classList.remove('hidden');
+      document.getElementById('account-content').classList.add('hidden');
+    }
+
+    function showAccount() {
+      document.getElementById('account-login-prompt').classList.add('hidden');
+      document.getElementById('account-content').classList.remove('hidden');
+    }
+
+    function updateUI() {
+      if (!user) return;
+      document.getElementById('user-name').textContent = user.name || 'Mondliebhaber';
+      document.getElementById('profile-name').value = user.name || '';
+      document.getElementById('profile-email').value = user.email;
+      document.getElementById('overview-points').textContent = user.points || 0;
+      const tier = document.getElementById('overview-tier');
+      tier.textContent = user.tier || 'MOON';
+      tier.className = `tier-badge tier-${(user.tier||'moon').toLowerCase()}`;
+    }
+
+    async function loadPoints() {
+      try {
+        const res = await fetch(`${API}/points`, { headers: { Authorization: `Bearer ${token}` } });
+        if (res.ok) {
+          const d = await res.json();
+          document.getElementById('points-balance').textContent = d.balance || 0;
+          document.getElementById('current-tier-name').textContent = d.tier || 'MOON';
+          let prog = 0, next = '';
+          if (d.tier === 'MOON') { prog = (d.balance/500)*100; next = `${500-d.balance} bis ECLIPSE`; }
+          else if (d.tier === 'ECLIPSE') { prog = ((d.balance-500)/1000)*100; next = `${1500-d.balance} bis NOVA`; }
+          else { prog = 100; next = 'Höchste Stufe! ✨'; }
+          document.getElementById('tier-progress-fill').style.width = `${Math.min(prog,100)}%`;
+          document.getElementById('next-tier-info').textContent = next;
+          document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('active'));
+          document.getElementById(`tier-${(d.tier||'moon').toLowerCase()}`)?.classList.add('active');
+        }
+        const hRes = await fetch(`${API}/points/history`, { headers: { Authorization: `Bearer ${token}` } });
+        if (hRes.ok) {
+          const h = await hRes.json();
+          const cont = document.getElementById('points-history');
+          if (!h.transactions?.length) cont.innerHTML = '<p class="text-muted">Keine Transaktionen.</p>';
+          else cont.innerHTML = `<table class="transactions-table"><thead><tr><th>Datum</th><th>Beschreibung</th><th>Punkte</th></tr></thead><tbody>${h.transactions.map(t=>`<tr><td>${new Date(t.created_at).toLocaleDateString('de')}</td><td>${{PURCHASE:'Einkauf',SIGNUP_BONUS:'Willkommen',NEWSLETTER_BONUS:'Newsletter',REDEMPTION:'Eingelöst'}[t.source]||t.source}</td><td class="${t.amount>0?'text-success':'text-danger'}">${t.amount>0?'+':''}${t.amount}</td></tr>`).join('')}</tbody></table>`;
+        }
+      } catch {}
+    }
+
+    async function loadOrders() {
+      try {
+        const res = await fetch(`${API}/orders`, { headers: { Authorization: `Bearer ${token}` } });
+        if (res.ok) {
+          const d = await res.json();
+          const cont = document.getElementById('orders-list');
+          const ov = document.getElementById('overview-orders');
+          if (!d.orders?.length) {
+            cont.innerHTML = '<div class="text-center" style="padding:var(--space-8)"><p class="text-muted">Noch keine Bestellungen.</p><a href="/shop.html" class="btn" style="margin-top:var(--space-4)">Jetzt shoppen</a></div>';
+            ov.innerHTML = '<p class="text-muted">Keine Bestellungen.</p>';
+          } else {
+            cont.innerHTML = d.orders.map(o => {
+              const items = JSON.parse(o.items_json||'[]');
+              return `<div class="order-card"><div class="order-header"><strong>#${o.id.slice(0,8)}</strong> <span class="text-muted">${new Date(o.created_at).toLocaleDateString('de')}</span><span class="order-status">${{pending:'Ausstehend',paid:'Bezahlt',shipped:'Versendet',delivered:'Zugestellt'}[o.status]||o.status}</span></div><div class="order-items">${items.slice(0,2).map(i=>`<span>${i.name} ×${i.quantity}</span>`).join('')}${items.length>2?`<span class="text-muted">+${items.length-2} mehr</span>`:''}</div><div class="order-footer"><strong>€${o.total?.toFixed(2)}</strong>${o.points_earned?`<span class="text-accent">+${o.points_earned} Pkt</span>`:''}</div></div>`;
+            }).join('');
+            ov.innerHTML = d.orders.slice(0,2).map(o=>`<div class="mini-order"><span>#${o.id.slice(0,8)}</span><span>€${o.total?.toFixed(2)}</span></div>`).join('');
+          }
+        }
+      } catch {}
+    }
+
+    function switchTab(name) {
+      document.querySelectorAll('.account-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+      document.querySelectorAll('.account-tab-content').forEach(c => c.classList.toggle('active', c.id === `tab-${name}`));
+      history.replaceState(null, '', `#${name}`);
+    }
+    window.switchTab = switchTab;
+
+    function handleHash() {
+      const h = location.hash.slice(1);
+      if (['overview','points','orders','settings'].includes(h)) switchTab(h);
+    }
+
+    function initUI() {
+      // Tabs
+      document.querySelectorAll('.account-tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+      // Cart
+      const cart = JSON.parse(localStorage.getItem('lunara_cart')||'[]');
+      document.getElementById('cart-count').textContent = cart.reduce((s,i)=>s+i.quantity,0);
+      document.getElementById('cart-button')?.addEventListener('click', () => { document.getElementById('cart-drawer')?.classList.add('open'); document.getElementById('cart-overlay')?.classList.add('active'); });
+      document.getElementById('close-cart')?.addEventListener('click', () => { document.getElementById('cart-drawer')?.classList.remove('open'); document.getElementById('cart-overlay')?.classList.remove('active'); });
+      document.getElementById('cart-overlay')?.addEventListener('click', () => { document.getElementById('cart-drawer')?.classList.remove('open'); document.getElementById('cart-overlay')?.classList.remove('active'); });
+      // Nav
+      const nav = document.getElementById('navbar'), toggle = document.getElementById('nav-toggle'), menu = document.getElementById('nav-menu');
+      window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 50));
+      toggle?.addEventListener('click', () => { menu?.classList.toggle('active'); toggle.classList.toggle('active'); });
+      // Safe exit
+      document.getElementById('safe-exit-btn')?.addEventListener('click', () => document.body.classList.toggle('safe-mode'));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') document.body.classList.toggle('safe-mode'); });
+      // Auth modal
+      document.getElementById('auth-modal-close')?.addEventListener('click', closeAuth);
+      document.getElementById('show-register')?.addEventListener('click', e => { e.preventDefault(); openAuthModal('register'); });
+      document.getElementById('show-login')?.addEventListener('click', e => { e.preventDefault(); openAuthModal('login'); });
+      document.getElementById('auth-modal')?.addEventListener('click', e => { if (e.target.id === 'auth-modal') closeAuth(); });
+      document.getElementById('login-form')?.addEventListener('submit', async e => {
+        e.preventDefault();
+        try {
+          const res = await fetch(`${API}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: document.getElementById('login-email').value, password: document.getElementById('login-password').value }) });
+          const d = await res.json();
+          if (!res.ok) throw new Error(d.error);
+          token = d.token; localStorage.setItem('lunara_token', token);
+          toast('Angemeldet!', 'success'); closeAuth(); await loadUser();
+        } catch (err) { toast(err.message, 'error'); }
+      });
+      document.getElementById('register-form')?.addEventListener('submit', async e => {
+        e.preventDefault();
+        try {
+          const res = await fetch(`${API}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: document.getElementById('register-name').value, email: document.getElementById('register-email').value, password: document.getElementById('register-password').value }) });
+          const d = await res.json();
+          if (!res.ok) throw new Error(d.error);
+          token = d.token; localStorage.setItem('lunara_token', token);
+          toast(d.message || 'Willkommen! +50 Punkte', 'success'); closeAuth(); await loadUser();
+        } catch (err) { toast(err.message, 'error'); }
+      });
+      // Settings forms
+      document.getElementById('profile-form')?.addEventListener('submit', async e => {
+        e.preventDefault();
+        try {
+          const res = await fetch(`${API}/auth/profile`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ name: document.getElementById('profile-name').value }) });
+          if (res.ok) { user.name = document.getElementById('profile-name').value; updateUI(); toast('Gespeichert!', 'success'); }
+        } catch { toast('Fehler', 'error'); }
+      });
+      document.getElementById('password-form')?.addEventListener('submit', async e => {
+        e.preventDefault();
+        const np = document.getElementById('new-password').value, cp = document.getElementById('confirm-password').value;
+        if (np !== cp) { toast('Passwörter stimmen nicht überein', 'error'); return; }
+        try {
+          const res = await fetch(`${API}/auth/password`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ currentPassword: document.getElementById('current-password').value, newPassword: np }) });
+          if (res.ok) { toast('Passwort geändert!', 'success'); e.target.reset(); }
+          else { const d = await res.json(); throw new Error(d.error); }
+        } catch (err) { toast(err.message || 'Fehler', 'error'); }
+      });
+      document.getElementById('logout-btn')?.addEventListener('click', async () => {
+        try { await fetch(`${API}/auth/logout`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } }); } catch {}
+        localStorage.removeItem('lunara_token'); token = null; user = null;
+        toast('Abgemeldet', 'success'); setTimeout(() => location.href = '/', 1000);
+      });
+      // Reveal
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+      } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+    }
+
+    function openAuthModal(mode = 'login') {
+      const m = document.getElementById('auth-modal'), t = document.getElementById('auth-modal-title');
+      document.getElementById('login-form').classList.toggle('hidden', mode !== 'login');
+      document.getElementById('register-form').classList.toggle('hidden', mode === 'login');
+      t.textContent = mode === 'login' ? 'Login' : 'Registrieren';
+      m.classList.add('active');
+    }
+    window.openAuthModal = openAuthModal;
+
+    function closeAuth() { document.getElementById('auth-modal')?.classList.remove('active'); }
+
+    function toast(msg, type = 'success') {
+      const c = document.getElementById('toast-container'), t = document.createElement('div');
+      t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 4000);
+    }
+
+    init();
+  </script>
+</body>
+</html>
